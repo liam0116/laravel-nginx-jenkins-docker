@@ -1,0 +1,9 @@
+# 基於 Jenkins LTS 版本的基礎鏡像
+FROM jenkins/jenkins:lts
+
+USER root
+
+# 安裝必要的工具
+RUN apt-get update && apt-get install -y sudo vim
+
+USER jenkins

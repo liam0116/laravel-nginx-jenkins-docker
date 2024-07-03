@@ -1,0 +1,18 @@
+# 使用 nginx:alpine 基礎鏡像
+FROM nginx:alpine
+
+# 設置日誌文件符號鏈接以便將日誌輸出到標準輸出和標準錯誤
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log && \
+    rm -rf /etc/nginx/conf.d/*
+
+# 安裝 openssl
+RUN apk add --update openssl && \
+    rm -rf /var/cache/apk/*
+
+# 創建證書文件夾
+RUN mkdir -p /etc/nginx/certificates
+
+# 生成自簽名證書
+# 注意：這只是開發環境的臨時證書，生產環境應使用有效的 SSL 證書
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/certificates/key.pem -out /etc/nginx/certificates/cert.pem -subj "/C=AT/ST=Vienna/L=Vienna/O=Security/OU=Development/CN=example.com"

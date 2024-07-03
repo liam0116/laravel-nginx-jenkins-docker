@@ -1,0 +1,2 @@
+# Cron 使用 (www-data或者設定用戶) 及 sudo，因為我們需要將日誌重定向到 /dev/stdout /dev/stderr 以便容器使用
+* * * * * cd /var/www/html && sudo -u qroh /usr/local/bin/php artisan schedule:run > /proc/1/fd/1 2>/proc/1/fd/2

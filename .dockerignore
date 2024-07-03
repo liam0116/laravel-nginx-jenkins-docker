@@ -1,0 +1,8 @@
+# .dockerignore - 此文件告訴 Docker 構建過程中要忽略哪些文件和目錄
+# 可以減少 Docker 構建上下文的大小，提高構建速度
+
+.git
+
+.dockerignore
+
+mysql/
